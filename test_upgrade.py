@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import io
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://import.meta.env.VITE_API_URL"
 
 
 def test_manual_prediction_partial():

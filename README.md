@@ -47,7 +47,7 @@ python train.py
 uvicorn backend.main:app --reload
 ```
 
-API Documentation: `http://localhost:8000/docs`
+API Documentation: `http://import.meta.env.VITE_API_URL/docs`
 
 ### 2. Frontend Setup
 

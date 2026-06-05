@@ -51,7 +51,10 @@ const CsvPrediction = () => {
     const formData = new FormData();
     formData.append("file", selectedFile);
     try {
-      const res = await axios.post("http://localhost:8000/upload", formData);
+      const res = await axios.post(
+        "http://import.meta.env.VITE_API_URL/upload",
+        formData,
+      );
       const data = res.data;
       setPreview(data);
 
@@ -81,7 +84,10 @@ const CsvPrediction = () => {
     formData.append("file", file);
     formData.append("mapping", JSON.stringify(mapping));
     try {
-      const res = await axios.post("http://localhost:8000/predict", formData);
+      const res = await axios.post(
+        "http://import.meta.env.VITE_API_URL/predict",
+        formData,
+      );
       setResults(res.data);
       setSuccess("Prediction completed successfully!");
       setTimeout(() => setSuccess(null), 3000);

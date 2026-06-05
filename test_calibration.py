@@ -3,7 +3,7 @@ import json
 
 
 def test_prediction(temp, days):
-    url = "http://localhost:8000/estimate-quality"
+    url = "http://import.meta.env.VITE_API_URL/estimate-quality"
     payload = {
         "Storage_Temperature": temp,
         "Storage_Day": days,
@@ -25,7 +25,7 @@ def test_prediction(temp, days):
         print(f"Generated CO2: {full_data['CO2']:.2f}")
 
         # Step 2: Predict
-        url_pred = "http://localhost:8000/manual-predict"
+        url_pred = "http://import.meta.env.VITE_API_URL/manual-predict"
         res_pred = requests.post(url_pred, json=full_data)
         if res_pred.status_code != 200:
             print(f"Prediction Error: {res_pred.text}")

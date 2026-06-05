@@ -96,9 +96,13 @@ const ManualPrediction = () => {
     setEstimating(true);
     setError(null);
 
-    const filledCount = Object.keys(formData).filter((key) => formData[key] !== "").length;
+    const filledCount = Object.keys(formData).filter(
+      (key) => formData[key] !== "",
+    ).length;
     if (filledCount < 1) {
-      setError("Please enter at least one condition to generate expected quality.");
+      setError(
+        "Please enter at least one condition to generate expected quality.",
+      );
       setEstimating(false);
       return;
     }
@@ -112,7 +116,7 @@ const ManualPrediction = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/estimate-quality",
+        "http://import.meta.env.VITE_API_URL/estimate-quality",
         payload,
       );
       const updatedData = { ...formData };
@@ -139,9 +143,13 @@ const ManualPrediction = () => {
     setLoading(true);
     setError(null);
 
-    const filledCount = Object.keys(formData).filter((key) => formData[key] !== "").length;
+    const filledCount = Object.keys(formData).filter(
+      (key) => formData[key] !== "",
+    ).length;
     if (filledCount < 1) {
-      setError("Please enter at least one condition to predict expected shelf life.");
+      setError(
+        "Please enter at least one condition to predict expected shelf life.",
+      );
       setLoading(false);
       return;
     }
@@ -155,7 +163,7 @@ const ManualPrediction = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/manual-predict",
+        "http://import.meta.env.VITE_API_URL/manual-predict",
         payload,
       );
       setResult(res.data);
@@ -295,12 +303,15 @@ const ManualPrediction = () => {
     },
   ];
 
-  const filledFieldsCount = Object.keys(formData).filter((key) => formData[key] !== "").length;
+  const filledFieldsCount = Object.keys(formData).filter(
+    (key) => formData[key] !== "",
+  ).length;
   const userEnteredCount = Object.keys(formData).filter(
-    (key) => formData[key] !== "" && !generatedFields.includes(key)
+    (key) => formData[key] !== "" && !generatedFields.includes(key),
   ).length;
 
-  const confidence = userEnteredCount <= 1 ? "Low" : userEnteredCount <= 4 ? "Medium" : "High";
+  const confidence =
+    userEnteredCount <= 1 ? "Low" : userEnteredCount <= 4 ? "Medium" : "High";
 
   return (
     <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500 p-6 font-poppins selection:bg-primary/30 antialiased">
@@ -431,7 +442,8 @@ const ManualPrediction = () => {
             {isGenerated && filledFieldsCount >= 1 && (
               <div className="text-[12px] font-medium text-emerald-400 bg-emerald-500/10 px-4 py-2.5 rounded-xl border border-emerald-500/20 flex items-center gap-2">
                 <CheckCircle2 size={14} className="text-emerald-400" />
-                Expected values generated from available inputs. Review before prediction.
+                Expected values generated from available inputs. Review before
+                prediction.
               </div>
             )}
 
@@ -525,11 +537,15 @@ const ManualPrediction = () => {
                       <p className="text-slate-100 text-[11px] font-bold uppercase tracking-[0.5px] opacity-70">
                         Prediction Confidence
                       </p>
-                      <p className={`text-[15px] font-bold ${
-                        confidence === "High" ? "text-emerald-400" :
-                        confidence === "Medium" ? "text-yellow-400" :
-                        "text-orange-400"
-                      }`}>
+                      <p
+                        className={`text-[15px] font-bold ${
+                          confidence === "High"
+                            ? "text-emerald-400"
+                            : confidence === "Medium"
+                              ? "text-yellow-400"
+                              : "text-orange-400"
+                        }`}
+                      >
                         {confidence} Confidence
                       </p>
                     </div>
