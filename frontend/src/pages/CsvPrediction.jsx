@@ -8,6 +8,7 @@ import {
   Download,
 } from "lucide-react";
 import axios from "axios";
+const API = import.meta.env.VITE_API_URL;
 
 const CsvPrediction = () => {
   const [file, setFile] = useState(null);
@@ -52,8 +53,13 @@ const CsvPrediction = () => {
     formData.append("file", selectedFile);
     try {
       const res = await axios.post(
-        "http://import.meta.env.VITE_API_URL/upload",
+        `${API}/upload`,
         formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       const data = res.data;
       setPreview(data);
@@ -85,8 +91,13 @@ const CsvPrediction = () => {
     formData.append("mapping", JSON.stringify(mapping));
     try {
       const res = await axios.post(
-        "http://import.meta.env.VITE_API_URL/predict",
+        `${API}/predict`,
         formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       setResults(res.data);
       setSuccess("Prediction completed successfully!");
