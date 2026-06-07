@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+const API = import.meta.env.VITE_API_URL;
 import {
   Activity,
   ShieldCheck,
@@ -116,7 +117,7 @@ const ManualPrediction = () => {
 
     try {
       const res = await axios.post(
-        "http://import.meta.env.VITE_API_URL/estimate-quality",
+        `${API}/estimate-quality`,
         payload,
       );
       const updatedData = { ...formData };
@@ -163,7 +164,7 @@ const ManualPrediction = () => {
 
     try {
       const res = await axios.post(
-        "http://import.meta.env.VITE_API_URL/manual-predict",
+        `${API}/manual-predict`,
         payload,
       );
       setResult(res.data);
